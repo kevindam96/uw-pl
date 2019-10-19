@@ -53,7 +53,7 @@ fun dates_in_month (dates:(int*int*int) list, m: int) =
       argument list of dates that are in any of the months in the list of
       Assume the list of months has no number repeated. Hint: Use your answer to
       the previous problem and SML's list-append operator (@). *)
-fun dates_in_months (dates:(int*int*int), months:int list) = 
+fun dates_in_months (dates:(int*int*int) list, months:int list) = 
     let val ans = []
     in
         if (null months)
