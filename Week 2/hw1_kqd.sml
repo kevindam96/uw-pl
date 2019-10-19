@@ -61,3 +61,20 @@ fun dates_in_months (dates:(int*int*int) list, months:int list) =
         else dates_in_month (dates, (hd months))
                  @ dates_in_months (dates, (tl months))
     end
+
+(* 6. Write a function get_nth that takes a list of strings and an int n and
+*     returns the nth element of the list where the head of the list is 1st. Do
+*     not worry about the case where the list has too few elements: your
+*     function may apply hd or tl to the empty list in this case, which is okay.*)
+fun get_nth (strings:string list, n:int) =
+    if null strings
+    then NONE
+    else let fun get_nth_nonempty (strings:string list, n:int) =
+                 if n <= 0
+                 then NONE
+                 else let fun get_nth_nonempty_nonzero_nonnegative(strings:string list, n:int)
+                              if n = 1 
+                              then (hd strings)
+                              else get_nth_nonempty_nonzero_nonnegative((tl strings), n - 1)
+                      end
+         end
