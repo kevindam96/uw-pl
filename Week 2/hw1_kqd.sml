@@ -34,3 +34,17 @@ fun number_in_months (dates:(int*int*int) list, months:int list) =
         else ans + number_in_month (dates, (hd months)) 
                  + number_in_months (dates, (tl months))
     end
+(* 4. Write a function dates_in_month that takes a list of dates and a month
+* (i.e., an int) and returns a list holding the dates from the argument list of
+* dates that are in the month. The returned list should contain dates in the
+* order they were originally given. *)
+fun dates_in_month (dates:(int*int*int) list, m: int) = 
+    let val ans = []
+    in
+        if (null dates)
+        then ans
+        else if (#2 (hd dates)) = m
+             then (hd dates) :: ans
+             else dates_in_month ((tl dates), m)
+    end
+
