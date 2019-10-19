@@ -26,4 +26,11 @@ fun number_in_month (dates:(int*int*int) list, m:int) =
       that are in any of the months in the list of months. Assume the list of
       months has no number repeated. Hint: Use your answer to the previous
       problem. *)
-(*TODO*)
+fun number_in_months (dates:(int*int*int) list, months:int list) =
+    let val ans = 0
+    in
+        if (null months)
+        then ans
+        else ans + number_in_month (dates, (hd months)) 
+                 + number_in_months (dates, (tl months))
+    end
