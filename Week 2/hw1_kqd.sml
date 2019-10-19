@@ -35,9 +35,9 @@ fun number_in_months (dates:(int*int*int) list, months:int list) =
                  + number_in_months (dates, (tl months))
     end
 (* 4. Write a function dates_in_month that takes a list of dates and a month
-* (i.e., an int) and returns a list holding the dates from the argument list of
-* dates that are in the month. The returned list should contain dates in the
-* order they were originally given. *)
+*     (i.e., an int) and returns a list holding the dates from the argument list of
+*     dates that are in the month. The returned list should contain dates in the
+*     order they were originally given. *)
 fun dates_in_month (dates:(int*int*int) list, m: int) = 
     let val ans = []
     in
@@ -48,3 +48,16 @@ fun dates_in_month (dates:(int*int*int) list, m: int) =
              else dates_in_month ((tl dates), m)
     end
 
+(* 5. Write a function dates_in_months that takes a list of dates and a list of
+      months (i.e., an int list) and returns a list holding the dates from the
+      argument list of dates that are in any of the months in the list of
+      Assume the list of months has no number repeated. Hint: Use your answer to
+      the previous problem and SML's list-append operator (@). *)
+fun dates_in_months (dates:(int*int*int), months:int list) = 
+    let val ans = []
+    in
+        if (null months)
+        then ans
+        else dates_in_month (dates, (hd months))
+                 @ dates_in_months (dates, (tl months))
+    end
