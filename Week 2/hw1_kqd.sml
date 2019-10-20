@@ -126,6 +126,22 @@ fun number_before_reaching_sum (sum:int, nums:int list) =
 fun what_month (day:int) = 
     number_before_reaching_sum(day, [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]) + 1
 
+(* 10. Write a function month_range that takes two days of the year day1 and
+*      day2 and returns an int list [m1, m2, ..., mn] where m1 is the month of
+       day 1, m2 is the month of day1+1, ..., and mn is the month of day day2.
+       Note that the result will have length day2 0 day1 + 1 or length 0 if
+       day1>day2.  *)
+fun month_range (day1:int, day2: int) = 
+    let 
+        val index = 1
+        val length = day2 - day1 + 1
+        fun month_range_helper (index:int, day1:int, length:int) = 
+            what_month (day1 + index) :: month_range_helper (index + 1, day1, length)
+    in
+        if index = length
+        then []
+        else month_range_helper (index, day1, length)
+    end
 
 
 
