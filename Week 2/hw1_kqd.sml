@@ -70,3 +70,38 @@ fun get_nth (strings:string list, n:int) =
     if n = 1
     then (hd strings)
     else get_nth ((tl strings), n - 1)
+
+(* 7. Write a function date_to_string that takes a date and returns a string of
+      the form January 20, 2013 (for example). Use the operator ^ for
+      concatenating strings and the library function Int.toString for converting
+      an int to a string. For producting the month part, do not use a bunch of conditionals.
+      Instead, use a list holding 12 strings and your answer to the previous
+      problem. For consistency, put a comma following the day and use
+      capitalized English month names: January, February, March, April, May,
+      June, July, August, September, October, November, December. *)
+fun date_to_string (date:(int*int*int)) = 
+    let 
+        fun year_to_string (y:int) = 
+            Int.toString (y)
+        fun month_to_string (m:int) = 
+            get_nth (["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"],
+                     m)
+        fun day_to_string (d:int) = 
+            Int.toString (d)
+    in  
+        month_to_string((#2 date)) ^ " " ^ day_to_string((#1 date)) ^ ", " ^
+        year_to_string((#1 date))
+    end
+
+
+
+
+
+
+
+
+
+
+
+
