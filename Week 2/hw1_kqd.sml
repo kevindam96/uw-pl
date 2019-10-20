@@ -136,11 +136,11 @@ fun month_range (day1:int, day2: int) =
         val index = 1
         val length = day2 - day1 + 1
         fun month_range_helper (index:int, day1:int, length:int) = 
-            what_month (day1 + index) :: month_range_helper (index + 1, day1, length)
+            if index = length
+            then []
+            else what_month (day1 + index) :: month_range_helper (index + 1, day1, length)
     in
-        if index = length
-        then []
-        else month_range_helper (index, day1, length)
+        what_month (day1) :: month_range_helper
     end
 
 
