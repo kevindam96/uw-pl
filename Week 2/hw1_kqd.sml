@@ -4,9 +4,15 @@
 fun is_older (date_1:int*int*int, date_2:int*int*int) = 
     if (#1 date_1) < (#1 date_2) 
     then true
-    else if (#2 date_1) < (#2 date_2)
-         then true
-         else (#3 date_1) < (#3 date_2)
+    else if (#1 date_1) > (#1 date_2)
+         then false
+         else if (#2 date_1) < (#2 date_2)
+              then true
+              else if (#2 date_1) > (#2 date_2)
+                   then false
+                   else if (#3 date_1) < (#3 date_2)
+                        then true
+                        else false
 
 (* 2. Write a function number_in_month that takes a list of dates and a month
 *     (i.e., an int) and returns how many dates in the list are in the given month.
@@ -149,8 +155,22 @@ fun month_range (day1:int, day2: int) =
 (* 11. Write a function oldest that takes a list of dates and evaluates to an
 *      (int*int*int) option. It evaluates to NONE if the list has no dates and
 *      SOME d if the date d is the oldest date in the list. *)
-fun oldest (dates:(int*int*int)
-
-
-
-
+fun oldest (dates:(int*int*int) list) =
+    if (null dates)
+    then
+        NONE
+    else
+        let
+            fun oldest_nonempty (dates:(int*int*int) list) = 
+                if null (tl dates)
+                then (hd dates)
+                else
+                    let val tl_oldest_date = oldest_nonempty (tl dates)
+                    in 
+                        if is_older ((hd dates), tl_oldest_date)
+                        then (hd dates)
+                        else tl_oldest_date
+                    end
+        in
+            SOME (oldest_nonempty (dates))
+        end
