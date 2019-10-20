@@ -110,7 +110,7 @@ fun number_before_reaching_sum (sum:int, nums:int list) =
             then index
             else number_before_reaching_sum_helper (index + 1, 
                                                     run + (hd nums),
-                                                    (tl nums)
+                                                    (tl nums))
     in  
         if run + (hd nums) >= sum
         then index
