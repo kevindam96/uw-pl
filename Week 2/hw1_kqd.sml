@@ -67,9 +67,8 @@ fun dates_in_months (dates:(int*int*int) list, months:int list) =
 *     not worry about the case where the list has too few elements: your
 *     function may apply hd or tl to the empty list in this case, which is okay.*)
 fun get_nth (strings:string list, n:int) =
-    if n <= 0
+    if n <= 0 orelse (null strings)
     then NONE
-    else let fun get_nth_nonzero_nonnegative (strings:string list, n:int) =
-                 if n = 1
-                 then (hd strings)
-                 else get_nth_nonzero_nonnegative ((tl strings), n - 1)
+    else if n = 1
+         then SOME (hd strings)
+         else get_nth ((tl strings), n - 1)
