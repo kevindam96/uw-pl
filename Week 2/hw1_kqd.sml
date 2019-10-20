@@ -124,7 +124,7 @@ fun number_before_reaching_sum (sum:int, nums:int list) =
 *     February, etc.). Use a list holding 12 integers and your answer to the
 *     previous problem. *)
 fun what_month (day:int) = 
-    number_before_reaching_sum(day, [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31])
+    number_before_reaching_sum(day, [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]) + 1
 
 
 
