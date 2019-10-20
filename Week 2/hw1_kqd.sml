@@ -90,7 +90,7 @@ fun date_to_string (date:(int*int*int)) =
         fun day_to_string (d:int) = 
             Int.toString (d)
     in  
-        month_to_string((#2 date)) ^ " " ^ day_to_string((#1 date)) ^ ", " ^
+        month_to_string((#2 date)) ^ " " ^ day_to_string((#3 date)) ^ ", " ^
         year_to_string((#1 date))
     end
 
