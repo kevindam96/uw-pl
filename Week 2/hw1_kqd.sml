@@ -140,10 +140,16 @@ fun month_range (day1:int, day2: int) =
             then []
             else what_month (day1 + index) :: month_range_helper (index + 1, day1, length)
     in
-        what_month (day1) :: month_range_helper
+        if day1 > day2
+        then [] 
+        else
+            what_month (day1) :: month_range_helper (index, day1, length)
     end
 
-
+(* 11. Write a function oldest that takes a list of dates and evaluates to an
+*      (int*int*int) option. It evaluates to NONE if the list has no dates and
+*      SOME d if the date d is the oldest date in the list. *)
+fun oldest (dates:(int*int*int)
 
 
 
