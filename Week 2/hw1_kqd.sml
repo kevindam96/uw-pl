@@ -33,6 +33,7 @@ fun number_in_months (dates:(int*int*int) list, months:int list) =
   if (null months)
   then 0
   else number_in_month (dates, (hd months)) + number_in_months (dates, (tl months))
+
 (* 4. Write a function dates_in_month that takes a list of dates and a month
 *     (i.e., an int) and returns a list holding the dates from the argument list of
 *     dates that are in the month. The returned list should contain dates in the
