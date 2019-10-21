@@ -236,3 +236,63 @@ fun dates_in_months_challenge (dates:(int*int*int) list, months:int list) =
                  @ dates_in_months (dates, (tl new_months))
         end
     end
+
+(* 13. Challenge Problem: Write a function reasonable_date that takes a date and
+*      determines if it describes a real date in the common era. A "real date"
+*      has a positive year (year 0 did not exist), a month between 1 and 12, and
+*      a day appropriate for the month. Solutions should properly handle leap
+*      years. Leap years are years that are either divisible by 400 or divisible
+*      by 4 but not divisible by 100. (Do not worry about days possibly lost in
+*      the conversion to the Gregorian calendar in the late 1500s.) *)
+fun reasonable_date (date:(int*int*int)) = 
+    let
+        fun is_leap_year (year:int) =
+            (year mod 400 = 0) orelse (year mod 4 = 0 andalso (not (year mod 100 = 0)))
+    in
+        if (not (#1 date) > 0)
+            then false
+            else if (not ((#2 date) > 0 andalso (#2 date) < 13))
+                 then false
+                 else if (not is_leap_year (#1 date))
+                      then let
+                               val days_in_month = [31, 28, 31, 30, 31, 30, 31,
+                                                    31, 30, 31, 30, 31]
+                               fun max_days_in_month (month:int) = 
+                                   let 
+                                       val index = 1
+                                       fun max_days_in_month_helper (month:int, 
+                                                                     index:int, 
+                                                                     days_in_month:int list) =  
+                                            if (#2 date) = index
+                                            then (hd days_in_month)
+                                            else max_days_in_month (month, index + 1, (tl days_in_month))
+                                   in  
+                                       if (null (tl days_in_month))
+                                       then 31
+                                       else
+                                            max_days_in_month (month, index + 1, (tl days_in_month))
+                                   end
+                           in  
+                               not ((#3 date) < 1 orelse (#3 date) > max_days_in_month (#3 date))
+                           end
+                      else let
+                               val days_in_month = [31, 29, 31, 30, 31, 30, 31,
+                                                    31, 30, 31, 30, 31]
+                               fun max_days_in_month (month:int) = 
+                                   let 
+                                       val index = 1
+                                       fun max_days_in_month_helper (month:int, 
+                                                                     index:int, 
+                                                                     days_in_month:int list) =  
+                                            if (#2 date) = index
+                                            then (hd days_in_month)
+                                            else max_days_in_month (month, index + 1, (tl days_in_month))
+                                   in  
+                                       if (null (tl days_in_month))
+                                       then 31
+                                       else
+                                            max_days_in_month (month, index + 1, (tl days_in_month))
+                                   end
+                           in  
+                               not ((#3 date) < 1 orelse (#3 date) > max_days_in_month (#3 date))
+                           end
