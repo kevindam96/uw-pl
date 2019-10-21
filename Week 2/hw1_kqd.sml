@@ -267,10 +267,7 @@ fun reasonable_date (date:(int*int*int)) =
                                             then (hd days_in_month)
                                             else max_days_in_month_helper (month, index + 1, (tl days_in_month))
                                    in  
-                                       if (null (tl days_in_month))
-                                       then 31
-                                       else
-                                            max_days_in_month_helper (month, index, (tl days_in_month))
+                                       max_days_in_month_helper (month, index, (tl days_in_month))
                                    end
                            in  
                                not ((#3 date) < 1 orelse (#3 date) > max_days_in_month (#3 date))
@@ -288,10 +285,7 @@ fun reasonable_date (date:(int*int*int)) =
                                             then (hd days_in_month)
                                             else max_days_in_month_helper (month, index + 1, (tl days_in_month))
                                    in  
-                                       if (null (tl days_in_month))
-                                       then 31
-                                       else
-                                            max_days_in_month_helper (month, index, (tl days_in_month))
+                                       max_days_in_month_helper (month, index, (tl days_in_month))
                                    end
                            in  
                                not ((#3 date) < 1 orelse (#3 date) > max_days_in_month (#3 date))
