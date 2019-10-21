@@ -162,6 +162,7 @@ fun oldest (dates:(int*int*int) list) =
             SOME (oldest_nonempty (dates))
         end
 
+(* COMMENT OUT 12. SINCE CANNOT TEST IT       
 (* 12. Challenge Problem: Write functions number_in_months_challenge and
 *      dates_in_months_challenge that are like your solutions to problem 3 and 5
 *      except having a month in the second argument multiple times has no more effect
@@ -237,6 +238,7 @@ fun dates_in_months_challenge (dates:(int*int*int) list, months:int list) =
                  @ dates_in_months (dates, (tl new_months))
         end
     end
+COMMENT OUT 12. SINCE CANNOT TEST IT *)
 
 (* 13. Challenge Problem: Write a function reasonable_date that takes a date and
 *      determines if it describes a real date in the common era. A "real date"
