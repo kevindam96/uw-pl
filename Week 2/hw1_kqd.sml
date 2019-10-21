@@ -180,7 +180,7 @@ fun number_in_months_challenge (dates:(int*int*int) list, months:int list) =
                          else contains ((tl nums), n)
                 fun remove_duplicates_helper (months, appeared, new_months) = 
                     if (null months)
-                    then []
+                    then new_months
                     else
                         if contains (appeared, (hd months))
                         then remove_duplicates_helper ((tl months), appeared, new_months)
