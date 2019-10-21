@@ -165,6 +165,42 @@ fun oldest (dates:(int*int*int) list) =
 *      dates_in_months_challenge that are like your solutions to problem 3 and 5
 *      except having a month in the second argument multiple times has no more effect
 *      than having it once. (Hint: Remove duplicates, then use previous work.) *)
+fun number_in_month_challenge (dates:(int*int*int) list, months:int list) = 
+    let 
+        fun remove_duplicates (months:int list) =
+            let 
+                val appeared = []
+                val new_months = []
+                fun contains (nums:int list, n:int) =
+                    if (null nums)
+                    then false
+                    else if (hd nums) = n
+                         then true
+                         else contains ((tl nums), n)
+                fun remove_duplicates_helper (months, appeared, new_months) = 
+                    if (null months)
+                    then []
+                    else
+                        if contains (appeared, (hd months))
+                        then remove_duplicates_helper ((tl months), appeared, new_months)
+                        else remove_duplicates_helper ((tl months), 
+                                                       (hd months) :: appeared, 
+                                                       (hd months) :: new_months)
+            in
+                if (null months)
+                then []
+                else remove_duplicates_helper (months, appeared, new_months)
+            end
+    in
+        let
+            val new_months = remove_duplicates (months)
+        in
+            if (null new_months)
+            then 0
+            else number_in_month (dates, (hd new_months)) + 
+                 number_in_months (dates, (tl new_months))
+        end
+    end
 fun dates_in_months_challenge (dates:(int*int*int) list, months:int list) = 
     let 
         fun remove_duplicates (months:int list) =
@@ -178,11 +214,14 @@ fun dates_in_months_challenge (dates:(int*int*int) list, months:int list) =
                          then true
                          else contains ((tl nums), n)
                 fun remove_duplicates_helper (months, appeared, new_months) = 
-                    if contains (appeared, (hd months))
-                    then remove_duplicates_helper ((tl months), appeared, new_months)
-                    else remove_duplicates_helper ((tl months), 
-                                                   (hd months) :: appeared, 
-                                                   (hd months) :: new_months)
+                    if (null months)
+                    then []
+                    else
+                        if contains (appeared, (hd months))
+                        then remove_duplicates_helper ((tl months), appeared, new_months)
+                        else remove_duplicates_helper ((tl months), 
+                                                       (hd months) :: appeared, 
+                                                       (hd months) :: new_months)
             in
                 if (null months)
                 then []
