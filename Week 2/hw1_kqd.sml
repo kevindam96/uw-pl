@@ -161,8 +161,6 @@ fun oldest (dates:(int*int*int) list) =
             SOME (oldest_nonempty (dates))
         end
 
-(*
-
 (* 12. Challenge Problem: Write functions number_in_months_challenge and
 *      dates_in_months_challenge that are like your solutions to problem 3 and 5
 *      except having a month in the second argument multiple times has no more effect
@@ -251,11 +249,11 @@ fun reasonable_date (date:(int*int*int)) =
         fun is_leap_year (year:int) =
             (year mod 400 = 0) orelse (year mod 4 = 0 andalso (not (year mod 100 = 0)))
     in
-        if (not (#1 date) > 0)
+        if (not ((#1 date) > 0))
             then false
             else if (not ((#2 date) > 0 andalso (#2 date) < 13))
                  then false
-                 else if (not is_leap_year (#1 date))
+                 else if (not (is_leap_year (#1 date)))
                       then let
                                val days_in_month = [31, 28, 31, 30, 31, 30, 31,
                                                     31, 30, 31, 30, 31]
@@ -299,5 +297,3 @@ fun reasonable_date (date:(int*int*int)) =
                                not ((#3 date) < 1 orelse (#3 date) > max_days_in_month (#3 date))
                            end
     end
-
-*)
