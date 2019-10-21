@@ -296,3 +296,4 @@ fun reasonable_date (date:(int*int*int)) =
                            in  
                                not ((#3 date) < 1 orelse (#3 date) > max_days_in_month (#3 date))
                            end
+    end
