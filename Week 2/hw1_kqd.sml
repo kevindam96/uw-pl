@@ -18,14 +18,11 @@ fun is_older (date_1:int*int*int, date_2:int*int*int) =
 *     (i.e., an int) and returns how many dates in the list are in the given month.
 * *)
 fun number_in_month (dates:(int*int*int) list, m:int) = 
-    let val ans = 0
-    in
-        if (null dates)
-        then ans
-        else if (#2 (hd dates)) = m
-             then ans + 1
-             else number_in_month ((tl dates), m)
-    end
+    if (null dates)
+    then 0
+    else if (#2 (hd dates)) = m
+         then 1
+         else number_in_month ((tl dates), m)
 
 (* 3. Write a function number_in_months that takes a list of dates and a list of
       (i.e., an int list) that returns the number of dates in the list of dates
@@ -33,26 +30,19 @@ fun number_in_month (dates:(int*int*int) list, m:int) =
       months has no number repeated. Hint: Use your answer to the previous
       problem. *)
 fun number_in_months (dates:(int*int*int) list, months:int list) =
-    let val ans = 0
-    in
-        if (null months)
-        then ans
-        else ans + number_in_month (dates, (hd months)) 
-                 + number_in_months (dates, (tl months))
-    end
+  if (null months)
+  then 0
+  else number_in_month (dates, (hd months)) + number_in_months (dates, (tl months))
 (* 4. Write a function dates_in_month that takes a list of dates and a month
 *     (i.e., an int) and returns a list holding the dates from the argument list of
 *     dates that are in the month. The returned list should contain dates in the
 *     order they were originally given. *)
 fun dates_in_month (dates:(int*int*int) list, m: int) = 
-    let val ans = []
-    in
-        if (null dates)
-        then ans
-        else if (#2 (hd dates)) = m
-             then (hd dates) :: ans
-             else dates_in_month ((tl dates), m)
-    end
+    if (null dates)
+    then []
+    else if (#2 (hd dates)) = m
+         then (hd dates) :: []
+         else dates_in_month ((tl dates), m)
 
 (* 5. Write a function dates_in_months that takes a list of dates and a list of
       months (i.e., an int list) and returns a list holding the dates from the
@@ -60,13 +50,9 @@ fun dates_in_month (dates:(int*int*int) list, m: int) =
       Assume the list of months has no number repeated. Hint: Use your answer to
       the previous problem and SML's list-append operator (@). *)
 fun dates_in_months (dates:(int*int*int) list, months:int list) = 
-    let val ans = []
-    in
-        if (null months)
-        then ans
-        else dates_in_month (dates, (hd months))
-                 @ dates_in_months (dates, (tl months))
-    end
+    if (null months)
+    then []
+    else dates_in_month (dates, (hd months)) @ dates_in_months (dates, (tl months))
 
 (* 6. Write a function get_nth that takes a list of strings and an int n and
 *     returns the nth element of the list where the head of the list is 1st. Do
@@ -130,7 +116,7 @@ fun number_before_reaching_sum (sum:int, nums:int list) =
 *     February, etc.). Use a list holding 12 integers and your answer to the
 *     previous problem. *)
 fun what_month (day:int) = 
-    number_before_reaching_sum(day, [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]) + 1
+    number_before_reaching_sum (day, [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]) + 1
 
 (* 10. Write a function month_range that takes two days of the year day1 and
 *      day2 and returns an int list [m1, m2, ..., mn] where m1 is the month of
@@ -174,3 +160,40 @@ fun oldest (dates:(int*int*int) list) =
         in
             SOME (oldest_nonempty (dates))
         end
+
+(* 12. Challenge Problem: Write functions number_in_months_challenge and
+*      dates_in_months_challenge that are like your solutions to problem 3 and 5
+*      except having a month in the second argument multiple times has no more effect
+*      than having it once. (Hint: Remove duplicates, then use previous work.) *)
+fun dates_in_months_challenge (dates:(int*int*int) list, months:int list) = 
+    let 
+        fun remove_duplicates (months:int list) =
+            let 
+                val appeared = []
+                val new_months = []
+                fun contains (nums:int list, n:int) =
+                    if (null nums)
+                    then false
+                    else if (hd nums) = n
+                         then true
+                         else contains ((tl nums), n)
+                fun remove_duplicates_helper (months, appeared, new_months) = 
+                    if contains (appeared, (hd months))
+                    then remove_duplicates_helper ((tl months), appeared, new_months)
+                    else remove_duplicates_helper ((tl months), 
+                                                   (hd months) :: appeared, 
+                                                   (hd months) :: new_months)
+            in
+                if (null months)
+                then []
+                else remove_duplicates_helper (months, appeared, new_months)
+            end
+    in
+        let val new_months = remove_duplicates (months)
+        in
+            if (null new_months)
+            then []
+            else dates_in_month (dates, (hd new_months))
+                 @ dates_in_months (dates, (tl new_months))
+        end
+    end
