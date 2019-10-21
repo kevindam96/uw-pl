@@ -161,11 +161,13 @@ fun oldest (dates:(int*int*int) list) =
             SOME (oldest_nonempty (dates))
         end
 
+(*
+
 (* 12. Challenge Problem: Write functions number_in_months_challenge and
 *      dates_in_months_challenge that are like your solutions to problem 3 and 5
 *      except having a month in the second argument multiple times has no more effect
 *      than having it once. (Hint: Remove duplicates, then use previous work.) *)
-fun number_in_month_challenge (dates:(int*int*int) list, months:int list) = 
+fun number_in_months_challenge (dates:(int*int*int) list, months:int list) = 
     let 
         fun remove_duplicates (months:int list) =
             let 
@@ -297,3 +299,5 @@ fun reasonable_date (date:(int*int*int)) =
                                not ((#3 date) < 1 orelse (#3 date) > max_days_in_month (#3 date))
                            end
     end
+
+*)
