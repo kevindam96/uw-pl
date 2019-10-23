@@ -42,7 +42,7 @@ fun dates_in_month (dates:(int*int*int) list, m: int) =
     if (null dates)
     then []
     else if (#2 (hd dates)) = m
-         then (hd dates) :: []
+         then (hd dates) :: dates_in_month ((tl dates), m)
          else dates_in_month ((tl dates), m)
 
 (* 5. Write a function dates_in_months that takes a list of dates and a list of
