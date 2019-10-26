@@ -160,9 +160,9 @@ fun all_same_color cards = (* bool *)
      | c1 :: c2 :: rest => (card_color c1) = (card_color c2) andalso
      all_same_color (c2 :: rest)
 
-(* 2.(e)  Write a function sum_cards, which takes a list of cards and returns the sum of their values. Use a locally
-          defined helper function that is tail recursive. (Take “calls use a constant amount of stack space” as a
-          requirement for this problem.) *)
+(* 2.(e) Write a function sum_cards, which takes a list of cards and returns the sum of their values. Use a locally
+         defined helper function that is tail recursive. (Take “calls use a constant amount of stack space” as a
+         requirement for this problem.) *)
 fun sum_cards cards = (* int *)
     let 
       fun sum_cards_helper (cards, acc) = (* int *)
@@ -173,8 +173,19 @@ fun sum_cards cards = (* int *)
       sum_cards_helper (cards, 0)
     end
 
-
-
+(* 2.(f) Write a function score, which takes a card list (the held-cards) and an int (the goal) and computes
+         the score as described above. *)
+fun score (cards, goal) = (* int *)
+    let 
+      fun prelim_score (cards, goal) = (* int *)
+        if (sum_cards (cards)) > goal
+        then 3 * ((sum_cards (cards)) - goal)
+        else goal - (sum_cards (cards))
+    in
+      if all_same_color (cards)
+      then prelim_score (cards, goal) div 2
+      else prelim_score (cards, goal)
+    end
 
 
 
