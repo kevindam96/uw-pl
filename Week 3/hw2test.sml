@@ -86,17 +86,13 @@ val test2f_4 = score ([(Hearts, Num 2), (Diamonds, King), (Hearts, Queen)], 7) =
 val test2f_5 = score ([(Hearts, Num 2), (Clubs, King), (Spades, Queen)], 25) = 3
 val test2f_6 = score ([(Hearts, Num 2), (Diamonds, King), (Hearts, Queen)], 25) = 1
 
-val test11 = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6
-
-val test12 = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],
+val test2g_1 = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6
+val test2g_2 = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],
                         [Draw,Draw,Draw,Draw,Draw],
                         42)
              = 3
-
-val test13 = ((officiate([(Clubs,Jack),(Spades,Num(8))],
+val test2g_3 = ((officiate([(Clubs,Jack),(Spades,Num(8))],
                          [Draw,Discard(Hearts,Jack)],
                          42);
-               false) 
+               false)
               handle IllegalMove => true)
-             
-             

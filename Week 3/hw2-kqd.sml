@@ -187,7 +187,32 @@ fun score (cards, goal) = (* int *)
       else prelim_score (cards, goal)
     end
 
-
+(* 2.(g) Write a function officiate, which “runs a game.” It takes a card list (the card-list) a move list
+         (what the player “does” at each point), and an int (the goal) and returns the score at the end of the
+         game after processing (some or all of) the moves in the move list in order. Use a locally defined recursive
+         helper function that takes several arguments that together represent the current state of the game. As
+         described above:
+         • The game starts with the held-cards being the empty list.
+         • The game ends if there are no more moves. (The player chose to stop since the move list is empty.)
+         • If the player discards some card c, play continues (i.e., make a recursive call) with the held-cards
+           not having c and the card-list unchanged. If c is not in the held-cards, raise the IllegalMove
+           exception.
+         • If the player draws and the card-list is (already) empty, the game is over. Else if drawing causes
+           the sum of the held-cards to exceed the goal, the game is over (after drawing). Else play continues
+           with a larger held-cards and a smaller card-list. *)
+fun officiate (cards, moves, goal) = (* int *)
+    let
+      fun officiate_helper (hand, cards, moves, goal) = (* int *)
+        case (hand, cards, moves, goal) of
+             (h, _, [], g) => score (h, g)
+           | (h, c :: c_rest, Draw :: m_rest, g) => officiate_helper (c :: h,
+           remove_card ((c :: c_rest), c, IllegalMove), m_rest, g)
+           | (h, [], Draw :: m_rest, g) => score (h, g)
+           | (h, c, Discard m :: m_rest, g) => officiate_helper (remove_card(h,
+           m, IllegalMove), c, m_rest, g)
+    in
+      officiate_helper ([], cards, moves, goal)
+    end
 
 
 
