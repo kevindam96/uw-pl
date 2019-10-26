@@ -160,8 +160,18 @@ fun all_same_color cards = (* bool *)
      | c1 :: c2 :: rest => (card_color c1) = (card_color c2) andalso
      all_same_color (c2 :: rest)
 
-
-
+(* 2.(e)  Write a function sum_cards, which takes a list of cards and returns the sum of their values. Use a locally
+          defined helper function that is tail recursive. (Take “calls use a constant amount of stack space” as a
+          requirement for this problem.) *)
+fun sum_cards cards = (* int *)
+    let 
+      fun sum_cards_helper (cards, acc) = (* int *)
+        case cards of
+             [] => acc
+           | x :: rest => sum_cards_helper(rest, acc + (card_value x))
+    in
+      sum_cards_helper (cards, 0)
+    end
 
 
 
