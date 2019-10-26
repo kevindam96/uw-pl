@@ -83,7 +83,26 @@ fun get_substitutions2(subs: string list list, s: string) = (* string list *)
       get_substitutions2_helper(subs, s, [])
     end
 
-
+(* 1.(d) Write a function similar_names, which takes a string list list of substitutions (as in parts (b) and
+         (c)) and a full name of type {first:string,middle:string,last:string} and returns a list of full
+         names (type {first:string,middle:string,last:string} list). The result is all the full names you
+         can produce by substituting for the first name (and only the first name) using substitutions and parts (b)
+         or (c). The answer should begin with the original name (then have 0 or
+         more other names). *)
+fun similar_names(subs : string list list, full : {first:string, middle:string,
+  last:string}) = (* {first:string, middle:string, last:string} list *)
+  let 
+    fun build_list(first_names : string list, middle : string, last : string) =
+      (* {first:string, middle:string, last:string} list *)
+      case first_names of
+           [] => []
+         | x :: rest => {first=x, middle=middle, last=last} :: build_list(rest,
+         middle, last)
+  in
+    let val {first=f, middle=m, last=l} = full
+    in full :: build_list(get_substitutions2(subs, f), m, l)
+    end
+  end
 
 
 

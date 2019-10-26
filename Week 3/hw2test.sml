@@ -42,11 +42,22 @@ val test1c_4 = get_substitutions2 ([["Fred", "Fredrick"], ["Elizabeth", "Betty"]
                                                          ["Fredrick", "Freddie",
                                   "F"]
 
-val test3 = get_substitutions2 ([["foo"],["there"]], "foo") = []
+val test1d_1 = similar_names ([], {first="Aaron", middle="Apple", last="Aardvark"}) = [{first="Aaron", middle="Apple", last="Aardvark"}]
+val test1d_2 = similar_names ([["Elizabeth", "Betty"], ["Fred", "Fredrick", "Freddie"], ["Airy", "Double-A", "Aaron", "Big-A"]], {first="Aaron", middle="Apple", last="Aardvark"}) = [{first="Aaron", middle="Apple", last="Aardvark"}, {first="Airy", middle="Apple", last="Aardvark"}, {first="Double-A", middle="Apple", last="Aardvark"}, {first="Big-A", middle="Apple", last="Aardvark"}]
+val test1d_3 = similar_names ([["Elizabeth", "Betty"], ["Airy", "Double-A",
+"Big-A"], ["Fred", "Fredrick", "Freddie"]], {first="Aaron", middle="Apple",
+last="Aardvark"}) = [{first="Aaron", middle="Apple", last="Aardvark"}]
+val test1d_4 = similar_names ([["Aaron", "Big-A"]], {first="Aaron",
+middle="Apple", last="Aardvark"}) = [{first="Aaron", middle="Apple",
+last="Aardvark"}, {first="Big-A", middle="Apple", last="Aardvark"}]
+val test1d_5 = similar_names
+([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]],
+{first="Fred", middle="W", last="Smith"}) =[{first="Fred", last="Smith",
+middle="W"}, {first="Fredrick", last="Smith", middle="W"},
+            {first="Freddie", last="Smith", middle="W"}, {first="F", last="Smith", middle="W"}]
 
-val test4 = similar_names ([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]], {first="Fred", middle="W", last="Smith"}) =
-	    [{first="Fred", last="Smith", middle="W"}, {first="Fredrick", last="Smith", middle="W"},
-	     {first="Freddie", last="Smith", middle="W"}, {first="F", last="Smith", middle="W"}]
+
+
 
 val test5 = card_color (Clubs, Num 2) = Black
 
