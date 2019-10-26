@@ -150,7 +150,15 @@ fun remove_card (cs, c, e) = (* card list *)
                     then rest
                     else x :: remove_card(rest, c, e)
 
-
+(* 2.(d) Write a function all_same_color, which takes a list of cards and returns true if all the cards in the
+         list are the same color. Hint: An elegant solution is very similar to one of the functions using nested
+         pattern-matching in the lectures. *)
+fun all_same_color cards = (* bool *)
+  case cards of
+       [] => true
+     | _ :: [] => true
+     | c1 :: c2 :: rest => (card_color c1) = (card_color c2) andalso
+     all_same_color (c2 :: rest)
 
 
 
