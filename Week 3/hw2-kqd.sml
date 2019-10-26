@@ -19,7 +19,8 @@ fun all_except_option(s : string, los : string list) = (* string list option *)
       fun all_except_option_nonempty(s : string, los : string list) = (* string
         list *)
         case los of
-             x :: [] => if same_string(x, s)
+             [] => [] (* should never happen *)
+           | x :: [] => if same_string(x, s)
                         then []
                         else x :: []
            | x :: rest => if same_string(x, s)
@@ -31,6 +32,31 @@ fun all_except_option(s : string, los : string list) = (* string list option *)
          | _ => SOME(all_except_option_nonempty(s, los))
     end
 
+(* 1.(b) Write a function get_substitutions1, which takes a string list list (a list of list of strings, the
+         substitutions) and a string s and returns a string list. The result has all the strings that are in
+         some list in substitutions that also has s, but s itself should not be in the
+         result. *)
+fun contains(str:string, strs:string list) = (* bool *)
+  case strs of
+       [] => false
+     | x :: rest => if same_string(x, str)
+                    then true
+                    else contains(str, rest)
+
+fun get_substitutions1(subs : string list list, s: string) = (* string list *)
+  case subs of
+       [] => []
+     | x :: [] => if contains(s, x)
+                  then case all_except_option(s, x) of
+                            NONE => []
+                          | SOME subs_for_x => subs_for_x
+                  else []
+     | x :: rest => if contains(s, x)
+                    then case all_except_option(s, x) of
+                              NONE => []
+                            | SOME subs_for_x => subs_for_x @
+                            get_substitutions1( rest, s)
+                    else get_substitutions1(rest, s)
 
 
 
