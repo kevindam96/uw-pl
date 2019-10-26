@@ -129,7 +129,16 @@ fun card_color c = (* color *)
      | (Hearts, _) => Red
      | (Spades, _) => Black
 
-
+(* 2.(b)  Write a function card_value, which takes a card and returns its value (numbered cards have their
+          number as the value, aces are 11, everything else is 10). Note: One
+          case-expression is enough. *)
+fun card_value c = (* rank *)
+  case c of
+       (_, Jack) => 10
+     | (_, Queen) => 10
+     | (_, King) => 10
+     | (_, Ace) => 11
+     | (_, Num x) => x
 
 
 
