@@ -53,10 +53,39 @@ fun get_substitutions1(subs : string list list, s: string) = (* string list *)
                   else []
      | x :: rest => if contains(s, x)
                     then case all_except_option(s, x) of
-                              NONE => []
+                              NONE => get_substitutions1(rest, s)
                             | SOME subs_for_x => subs_for_x @
-                            get_substitutions1( rest, s)
+                            get_substitutions1(rest, s)
                     else get_substitutions1(rest, s)
+
+(* 1.(c) Write a function get_substitutions2, which is like get_substitutions1 except it uses a tail-recursive
+         local helper function. *)
+fun get_substitutions2(subs: string list list, s: string) = (* string list *)
+    let 
+      fun get_substitutions2_helper(subs: string list list, s: string, acc: string
+            list) = (* string list *)
+        case subs of
+             [] => acc
+           | x :: [] => if contains(s, x)
+                        then case all_except_option(s, x) of
+                                  NONE => acc
+                                | SOME subs_for_x => acc @ subs_for_x
+                        else acc
+           | x :: rest => if contains(s, x)
+                          then case all_except_option(s, x) of
+                                    NONE => get_substitutions2_helper(rest, s,
+                                    acc)
+                                  | SOME subs_for_x =>
+                                    get_substitutions2_helper(rest, s,
+                                    acc @ subs_for_x)
+                          else get_substitutions2_helper(rest, s, acc)
+    in
+      get_substitutions2_helper(subs, s, [])
+    end
+
+
+
+
 
 
 

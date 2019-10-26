@@ -22,7 +22,25 @@ val test1b_2 = get_substitutions1 ([["Fred", "Fredrick"], ["Elizabeth", "Betty"]
                                   "F"]
 val test1b_3 = get_substitutions1([["Fred", "Fredrick"], ["Jeff", "Jeffrey"],
 ["Geoff", "Jeff", "Jeffrey"]], "Jeff") = ["Jeffrey", "Geoff", "Jeffrey"]
+val test1b_4 = get_substitutions1 ([["Fred", "Fredrick"], ["Elizabeth", "Betty"], [],
+                                                         ["Freddie", "Fred",
+                                                         "F"]], "Fred") =
+                                                         ["Fredrick", "Freddie",
+                                  "F"]
 
+val test1c_1 = get_substitutions2 ([["foo"],["there"]], "foo") = []
+val test1c_2 = get_substitutions2 ([["Fred", "Fredrick"], ["Elizabeth", "Betty"],
+                                                         ["Freddie", "Fred",
+                                                         "F"]], "Fred") =
+                                                         ["Fredrick", "Freddie",
+                                  "F"]
+val test1c_3 = get_substitutions2([["Fred", "Fredrick"], ["Jeff", "Jeffrey"],
+["Geoff", "Jeff", "Jeffrey"]], "Jeff") = ["Jeffrey", "Geoff", "Jeffrey"]
+val test1c_4 = get_substitutions2 ([["Fred", "Fredrick"], ["Elizabeth", "Betty"], [],
+                                                         ["Freddie", "Fred",
+                                                         "F"]], "Fred") =
+                                                         ["Fredrick", "Freddie",
+                                  "F"]
 
 val test3 = get_substitutions2 ([["foo"],["there"]], "foo") = []
 
