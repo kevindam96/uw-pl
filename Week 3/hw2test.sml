@@ -56,10 +56,10 @@ val test1d_5 = similar_names
 middle="W"}, {first="Fredrick", last="Smith", middle="W"},
             {first="Freddie", last="Smith", middle="W"}, {first="F", last="Smith", middle="W"}]
 
-
-
-
-val test5 = card_color (Clubs, Num 2) = Black
+val test2a_1 = card_color (Clubs, Num 2) = Black
+val test2a_2 = card_color (Diamonds, Num 8) = Red
+val test2a_3 = card_color (Hearts, Queen) = Red
+val test2a_4 = card_color (Spades, King) = Black
 
 val test6 = card_value (Clubs, Num 2) = 2
 

@@ -120,3 +120,33 @@ datatype move = Discard of card | Draw
 exception IllegalMove
 
 (* put your solutions for problem 2 here *)
+(* 2.(a) Write a function card_color, which takes a card and returns its color (spades and clubs are black,
+         diamonds and hearts are red). Note: One case-expression is enough. *)
+fun card_color c = (* color *)
+  case c of
+       (Clubs, _) => Black
+     | (Diamonds, _) => Red
+     | (Hearts, _) => Red
+     | (Spades, _) => Black
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
