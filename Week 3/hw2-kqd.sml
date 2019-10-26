@@ -140,6 +140,15 @@ fun card_value c = (* rank *)
      | (_, Ace) => 11
      | (_, Num x) => x
 
+(* 2.(c) Write a function remove_card, which takes a list of cards cs, a card c, and an exception e. It returns a
+         list that has all the elements of cs except c. If c is in the list more than once, remove only the first one.
+         If c is not in the list, raise the exception e. You can compare cards with =. *)
+fun remove_card (cs, c, e) = (* card list *)
+  case cs of
+       [] => raise e       
+     | x :: rest => if (x = c)
+                    then rest
+                    else x :: remove_card(rest, c, e)
 
 
 
