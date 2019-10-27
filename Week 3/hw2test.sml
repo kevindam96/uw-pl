@@ -96,3 +96,14 @@ val test2g_3 = ((officiate([(Clubs,Jack),(Spades,Num(8))],
                          42);
                false)
               handle IllegalMove => true)
+
+val test2f_1 = score_challenge ([(Hearts, Num 2),(Clubs, Num 4)],10) = 4
+val test2f_2 = score_challenge ([(Hearts, Num 2), (Hearts, Num 4)], 10) = 2
+val test2f_3 = score_challenge ([(Hearts, Num 2), (Clubs, King), (Spades, Queen)], 7) = 45
+val test2f_4 = score_challenge ([(Hearts, Num 2), (Diamonds, King), (Hearts, Queen)], 7) = 22
+val test2f_5 = score_challenge ([(Hearts, Num 2), (Clubs, King), (Spades, Queen)], 25) = 3
+val test2f_6 = score_challenge ([(Hearts, Num 2), (Diamonds, King), (Hearts, Queen)], 25) = 1
+val test2f_7 = score_challenge ([(Hearts, Num 2), (Clubs, King), (Hearts, Ace), (Spades, Queen), (Spades, Ace), (Diamonds, Ace)], 25) = 0
+val test2f_8 = score_challenge ([(Hearts, Num 2), (Clubs, King), (Hearts, Ace), (Spades, Queen), (Spades, Ace), (Diamonds, Ace), (Clubs, Ace)], 100) = 34
+val test2f_9 = score_challenge ([(Hearts, Num 2), (Clubs, King), (Hearts, Ace), (Spades, Queen), (Spades, Ace), (Diamonds, Ace), (Clubs, Ace)], 10) = 48
+val test2f_10 = score_challenge ([(Hearts, Num 2), (Hearts, King), (Hearts, Ace), (Hearts, Queen), (Hearts, Ace), (Hearts, Ace), (Hearts, Ace)], 10) = 24

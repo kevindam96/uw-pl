@@ -214,6 +214,62 @@ fun officiate (cards, moves, goal) = (* int *)
       officiate_helper ([], cards, moves, goal)
     end
 
+(* 3.(a) Write score_challenge and officiate_challenge to be like their non-challenge counterparts except
+         each ace can have a value of 1 or 11 and score_challenge should always return the least (i.e., best)
+         possible score. (Note the game-ends-if-sum-exceeds-goal rule should apply only if there is no sum that
+         is less than or equal to the goal.) Hint: This is easier than you might think. *)
+fun score_challenge (cards, goal) = (* int *)
+    let 
+      fun card_value_no_ace c = (* int *)
+        case c of
+             (_, Jack) => 10
+           | (_, Queen) => 10
+           | (_, King) => 10
+           | (_, Num x) => x
+      fun best_prelim_score (cards, goal) = (* int *)
+        let
+          fun count_aces (cards) = (* int *)
+            case cards of
+                 [] => 0
+               | x :: rest => case x of
+                                   (_, Ace) => 1 + count_aces(rest)
+                                 | _ => count_aces(rest)
+          fun sum_non_aces (cards) = (* int *)
+            case cards of
+                 [] => 0
+               | x :: rest => case x of
+                                   (_, Ace) => sum_non_aces(rest)
+                                 | _ => card_value_no_ace (x) + sum_non_aces
+                                 (rest)
+          fun ace_summer (goal, num_ace, acc) = (* int *) 
+            if num_ace = 0
+            then acc
+            else if acc + (num_ace * 11) <= goal
+            then ace_summer (goal, num_ace - 1, acc + 11)
+            else ace_summer (goal, num_ace - 1, acc + 1)
+          fun best_prelim_score_helper (goal, num_ace, acc) = (* int *)
+            if (ace_summer (goal, num_ace, acc)) > goal
+            then 3 * ((ace_summer (goal, num_ace, acc)) - goal)
+            else goal - (ace_summer (goal, num_ace, acc))
+        in
+          best_prelim_score_helper (goal, count_aces
+          (cards), sum_non_aces (cards))
+        end
+    in
+      if all_same_color (cards)
+      then best_prelim_score (cards, goal) div 2
+      else best_prelim_score (cards, goal)
+    end
+
+
+
+
+
+
+
+
+
+
 
 
 
