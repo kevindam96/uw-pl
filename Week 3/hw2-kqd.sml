@@ -14,12 +14,19 @@ fun same_string(s1 : string, s2 : string) =
          string is not in the list, else return SOME lst where lst is identical to the argument list except the string
          is not in it. You may assume the string is in the list at most once. Use same_string, provided to you,
          to compare strings. Sample solution is around 8 lines. *)
+fun contains (lst, a) = (* bool *)
+  case lst of 
+       [] => false
+     | x :: rest => if x = a
+                    then true
+                    else contains (rest, a)
+
 fun all_except_option(s : string, los : string list) = (* string list option *)
     let 
       fun all_except_option_nonempty(s : string, los : string list) = (* string
         list *)
         case los of
-             [] => [] (* should never happen *)
+             [] => []
            | x :: [] => if same_string(x, s)
                         then []
                         else x :: []
@@ -29,7 +36,9 @@ fun all_except_option(s : string, los : string list) = (* string list option *)
     in
       case los of
            [] => NONE
-         | _ => SOME(all_except_option_nonempty(s, los))
+         | _ => if contains (los, s)
+                then SOME(all_except_option_nonempty(s, los))
+                else NONE
     end
 
 (* 1.(b) Write a function get_substitutions1, which takes a string list list (a list of list of strings, the
@@ -220,12 +229,6 @@ fun officiate (cards, moves, goal) = (* int *)
          is less than or equal to the goal.) Hint: This is easier than you might think. *)
 fun score_challenge (cards, goal) = (* int *)
     let 
-      fun card_value_no_ace c = (* int *)
-        case c of
-             (_, Jack) => 10
-           | (_, Queen) => 10
-           | (_, King) => 10
-           | (_, Num x) => x
       fun best_prelim_score (cards, goal) = (* int *)
         let
           fun count_aces (cards) = (* int *)
@@ -239,7 +242,7 @@ fun score_challenge (cards, goal) = (* int *)
                  [] => 0
                | x :: rest => case x of
                                    (_, Ace) => sum_non_aces(rest)
-                                 | _ => card_value_no_ace (x) + sum_non_aces
+                                 | _ => card_value (x) + sum_non_aces
                                  (rest)
           fun ace_summer (goal, num_ace, acc) = (* int *) 
             if num_ace = 0
