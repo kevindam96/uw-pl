@@ -214,10 +214,14 @@ fun officiate (cards, moves, goal) = (* int *)
       fun officiate_helper (hand, cards, moves, goal) = (* int *)
         case (hand, cards, moves, goal) of
              (h, _, [], g) => score (h, g)
-           | (h, c :: c_rest, Draw :: m_rest, g) => officiate_helper (c :: h,
+           | (h, c :: c_rest, Draw :: m_rest, g) => if sum_cards (h) > goal
+                                                    then score (h, g)
+                                                    else officiate_helper (c :: h,
            remove_card ((c :: c_rest), c, IllegalMove), m_rest, g)
            | (h, [], Draw :: m_rest, g) => score (h, g)
-           | (h, c, Discard m :: m_rest, g) => officiate_helper (remove_card(h,
+           | (h, c, Discard m :: m_rest, g) => if sum_cards (h) > goal
+                                               then score (h, g)
+                                               else officiate_helper (remove_card(h,
            m, IllegalMove), c, m_rest, g)
     in
       officiate_helper ([], cards, moves, goal)
