@@ -53,3 +53,15 @@ fun longest_string1 str_list =
                longest
                str_list
     end
+(* 3.  Write a function longest_string2 that is exactly like longest_string1 except in the case of ties
+       it returns the string closest to the end of the list. Your solution should be almost an exact copy of
+       longest_string1. Still use foldl and String.size. *)
+fun longest_string2 str_list = 
+    let val longest = ""
+    in
+    List.foldl (fn (str, longest) => if (String.size (str) >= String.size
+    (longest)) 
+                                    then str else longest)
+               longest
+               str_list
+    end

@@ -16,9 +16,13 @@ val test2_3 = longest_string1 ["1", "2_", "3__", "4___", "7______", "5____"] =
   "7______"
 val test2_4 = longest_string1 ["2_", "3__", "_3_", "__3"] = "3__"
 
+(* Problem 3. Tests *)
+val test3_1 = longest_string2 ["A","bc","C"] = "bc"
+val test3_2 = longest_string2 [""] = ""
+val test3_3 = longest_string2 ["1", "2_", "3__", "4___", "7______", "5____"] =
+  "7______"
+val test3_4 = longest_string2 ["2_", "3__", "_3_", "__3"] = "__3"
 (*
-val test3 = longest_string2 ["A","bc","C"] = "bc"
-
 val test4a = longest_string3 ["A","bc","C"] = "bc"
 
 val test4b = longest_string4 ["A","B","C"] = "C"
