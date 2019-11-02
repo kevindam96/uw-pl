@@ -9,9 +9,14 @@ val test1_2 = only_capitals ["b"] = []
 val test1_3 = only_capitals ["A", "b", "C", "d"] = ["A", "C"]
 val test1_4 = only_capitals ["a", "B", "c", "D"] = ["B", "D"]
 
-(*
-val test2 = longest_string1 ["A","bc","C"] = "bc"
+(*Problem 2. Tests *)
+val test2_1 = longest_string1 ["A","bc","C"] = "bc"
+val test2_2 = longest_string1 [""] = ""
+val test2_3 = longest_string1 ["1", "2_", "3__", "4___", "7______", "5____"] =
+  "7______"
+val test2_4 = longest_string1 ["2_", "3__", "_3_", "__3"] = "3__"
 
+(*
 val test3 = longest_string2 ["A","bc","C"] = "bc"
 
 val test4a = longest_string3 ["A","bc","C"] = "bc"
