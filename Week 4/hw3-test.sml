@@ -2,9 +2,14 @@
 (* These are basic test cases. Passing these tests does not guarantee that your code will pass the actual homework grader *)
 (* To run the test, add a new line to the top of this file: use "homeworkname.sml"; *)
 (* All the tests should evaluate to true. For example, the REPL should say: val test1 = true : bool *)
+use "hw3-kqd.sml";
+(* Problem 1. Tests *)
+val test1_1 = only_capitals ["A","B","C"] = ["A","B","C"]
+val test1_2 = only_capitals ["b"] = []
+val test1_3 = only_capitals ["A", "b", "C", "d"] = ["A", "C"]
+val test1_4 = only_capitals ["a", "B", "c", "D"] = ["B", "D"]
 
-val test1 = only_capitals ["A","B","C"] = ["A","B","C"]
-
+(*
 val test2 = longest_string1 ["A","bc","C"] = "bc"
 
 val test3 = longest_string2 ["A","bc","C"] = "bc"
@@ -33,3 +38,4 @@ val test11 = match (Const(1), UnitP) = NONE
 
 val test12 = first_match Unit [UnitP] = SOME []
 
+*)
