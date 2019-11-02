@@ -22,11 +22,20 @@ val test3_2 = longest_string2 [""] = ""
 val test3_3 = longest_string2 ["1", "2_", "3__", "4___", "7______", "5____"] =
   "7______"
 val test3_4 = longest_string2 ["2_", "3__", "_3_", "__3"] = "__3"
+
+(* Problem 4. Tests *)
+val test4_1 = longest_string3 ["A","bc","C"] = "bc"
+val test4_2 = longest_string3 [""] = ""
+val test4_3 = longest_string3 ["1", "2_", "3__", "4___", "7______", "5____"] =
+  "7______"
+val test4_4 = longest_string3 ["2_", "3__", "_3_", "__3"] = "3__"
+
+val test4_5 = longest_string4 ["A","bc","C"] = "bc"
+val test4_6 = longest_string4 [""] = ""
+val test4_7 = longest_string4 ["1", "2_", "3__", "4___", "7______", "5____"] =
+  "7______"
+val test4_8 = longest_string4 ["2_", "3__", "_3_", "__3"] = "__3"
 (*
-val test4a = longest_string3 ["A","bc","C"] = "bc"
-
-val test4b = longest_string4 ["A","B","C"] = "C"
-
 val test5 = longest_capitalized ["A","bc","C"] = "A"
 
 val test6 = rev_string "abc" = "cba"

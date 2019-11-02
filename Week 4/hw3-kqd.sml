@@ -59,9 +59,35 @@ fun longest_string1 str_list =
 fun longest_string2 str_list = 
     let val longest = ""
     in
-    List.foldl (fn (str, longest) => if (String.size (str) >= String.size
-    (longest)) 
-                                    then str else longest)
+    List.foldl (fn (str, longest) => if (String.size (longest) > String.size
+    (str)) 
+                                    then longest else str)
                longest
                str_list
     end
+
+(* 4. Write functions longest_string_helper, longest_string3, and longest_string4 such that:
+        • longest_string3 has the same behavior as longest_string1 and longest_string4 has the
+          same behavior as longest_string2.
+        • longest_string_helper has type (int * int -> bool) -> string list -> string
+          (notice the currying). This function will look a lot like longest_string1 and longest_string2
+          but is more general because it takes a function as an argument.
+        • If longest_string_helper is passed a function that behaves like > (so it returns true exactly
+          when its first argument is stricly greater than its second), then the function returned has the same
+          behavior as longest_string1.
+        • longest_string3 and longest_string4 are defined with val-bindings and partial applications
+          of longest_string_helper. *)
+fun longest_string_helper f = fn str_list =>
+    let val longest = ""
+    in
+      List.foldl (fn (str, longest) => if (f (String.size (longest), String.size
+      (str)))
+                                       then longest
+                                       else str)
+                longest 
+                str_list
+    end
+
+val longest_string3 = longest_string_helper (fn (x, y) => x >= y)
+val longest_string4 = longest_string_helper (fn (x, y) => x > y)
+
