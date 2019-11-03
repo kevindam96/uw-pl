@@ -144,12 +144,20 @@ fun all_answers f = fn arg_list =>
 
 (* 9(a). Use g to define a function count_wildcards that takes a pattern and
          returns how many Wildcard patterns it contains.  *)
-fun count_wildcards p = 
-    g (fn () => 1) (fn _ => 0) p
+fun count_wildcards p = g (fn () => 1) (fn _ => 0) p
 
+(* 9.(b) Use g tp define a function count_wild_and_variable_lengths that takes a
+         pattern and returns the number of Wildcard patterns it contains plus the sum
+         of the string lengths of all the variables in the variable patterns it
+         contains *)
+fun count_wild_and_variable_lengths p = g (fn () => 1) (fn x => String.size (x)) p
 
-
-
+(* 9.(c) Use g to define a function count_some_var that takes a string and a pattern (as a pair) and
+         returns the number of times the string appears as a variable in the pattern. We care only about
+         variable names; the constructor names are not relevant. *)
+fun count_some_var (str, p) = 
+    g (fn () => 0) (fn x => if x = str then 1 else 0) p
+    
 
 
 

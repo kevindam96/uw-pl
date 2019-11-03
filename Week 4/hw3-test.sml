@@ -71,22 +71,22 @@ val test8_6 = all_answers (fn x => if Char.isUpper (String.sub (x, 0)) then SOME
 [x] else NONE) ["Hello", "World", "How", "Are", "You"] = SOME ["Hello",
                             "World", "How", "Are", "You"]
 
-
+(* Problem 9. Tests *)
 val test9a_1 = count_wildcards Wildcard = 1
 val test9a_2 = count_wildcards (TupleP [Wildcard, Wildcard, Wildcard]) = 3
 val test9a_3 = count_wildcards (TupleP [Variable "Nice", Variable "HW",
 Wildcard]) = 1
 
+val test9b_1 = count_wild_and_variable_lengths (Variable("a")) = 1
+val test9b_2 = count_wild_and_variable_lengths (TupleP [Wildcard, Wildcard,
+(Variable "abc")]) = 5
 
-
-
-
+val test9c_1 = count_some_var ("x", Variable("x")) = 1
+val test9c_2 = count_some_var ("x", Wildcard) = 0
+val test9c_3 = count_some_var ("abc", (TupleP [Wildcard, Wildcard, (Variable
+"abc"), (Variable "bca"), (Variable "abc")])) = 2
 
 (*
-val test9b = count_wild_and_variable_lengths (Variable("a")) = 1
-
-val test9c = count_some_var ("x", Variable("x")) = 1
-
 val test10 = check_pat (Variable("x")) = true
 
 val test11 = match (Const(1), UnitP) = NONE
