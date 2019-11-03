@@ -47,9 +47,17 @@ val test5_4 = longest_capitalized ["wash", "washing", "washington",
 val test6_1 = rev_string "abc" = "cba"
 val test6_2 = rev_string "" = ""
 val test6_3 = rev_string "Hi there" = "ereht iH"
-(*
-val test7 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] = 4
 
+(* Problem 7. Tests *)
+val test7_1 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] = 4
+val test7_2 = ((first_answer (fn x => if Char.isUpper (String.sub (x, 0)) then SOME x
+                                    else NONE) ["hi", "there", "world"]); false) handle NoAnswer => true
+val test7_3 = first_answer (fn x => if Char.isUpper (String.sub (x, 0)) then SOME
+x else NONE) ["hi", "there", "World"] = "World"
+val test7_4 = first_answer (fn x => if Char.isUpper (String.sub (x, 0)) then
+  SOME x else NONE) ["hi", "There", "World"] = "There"
+
+(*
 val test8 = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE
 
 val test9a = count_wildcards Wildcard = 1

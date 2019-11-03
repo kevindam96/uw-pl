@@ -103,11 +103,19 @@ str_list
       in the String module. (Browse the module documentation to find the most useful functions.) *)
 fun rev_string str = (String.implode o List.rev o String.explode) str
 
-
-
-
-
-
+(* 7. Write a function first_answer of type (’a -> ’b option) -> ’a list -> ’b
+      (notice the 2 arguments are curried). The first argument should be applied to
+      elements of the second argument in order until the first time it returns SOME
+      v for some v and then v is the result of the call to first_answer. If the
+      first argument returns NONE for all list elements, then first_answer should
+      raise the exception NoAnswer. Hints: Sample solution is 5 lines and does
+      nothing fancy. *)
+fun first_answer f = fn arg_list =>
+    case arg_list of
+         [] => raise NoAnswer
+       | x :: rest => case (f x) of
+                           NONE => first_answer f (rest)
+                         | SOME x => x
 
 
 
