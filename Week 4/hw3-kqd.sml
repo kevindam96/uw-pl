@@ -98,7 +98,10 @@ val longest_string4 = longest_string_helper (fn (x, y) => x > y)
 val longest_capitalized = fn str_list => (longest_string1 o only_capitals)
 str_list
 
-
+(* 6. Write a function rev_string that takes a string and returns the string that is the same characters in
+      reverse order. Use ML’s o operator, the library function rev for reversing lists, and two library functions
+      in the String module. (Browse the module documentation to find the most useful functions.) *)
+fun rev_string str = (String.implode o List.rev o String.explode) str
 
 
 
