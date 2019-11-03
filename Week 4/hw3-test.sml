@@ -72,9 +72,17 @@ val test8_6 = all_answers (fn x => if Char.isUpper (String.sub (x, 0)) then SOME
                             "World", "How", "Are", "You"]
 
 
-(*
-val test9a = count_wildcards Wildcard = 1
+val test9a_1 = count_wildcards Wildcard = 1
+val test9a_2 = count_wildcards (TupleP [Wildcard, Wildcard, Wildcard]) = 3
+val test9a_3 = count_wildcards (TupleP [Variable "Nice", Variable "HW",
+Wildcard]) = 1
 
+
+
+
+
+
+(*
 val test9b = count_wild_and_variable_lengths (Variable("a")) = 1
 
 val test9c = count_some_var ("x", Variable("x")) = 1

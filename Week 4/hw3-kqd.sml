@@ -142,6 +142,14 @@ fun all_answers f = fn arg_list =>
                          | _ => all_answers_helper (x :: rest, SOME [])
     end
 
+(* 9(a). Use g to define a function count_wildcards that takes a pattern and
+         returns how many Wildcard patterns it contains.  *)
+fun count_wildcards p = 
+    g (fn () => 1) (fn _ => 0) p
+
+
+
+
 
 
 
