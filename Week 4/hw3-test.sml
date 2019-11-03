@@ -57,9 +57,22 @@ x else NONE) ["hi", "there", "World"] = "World"
 val test7_4 = first_answer (fn x => if Char.isUpper (String.sub (x, 0)) then
   SOME x else NONE) ["hi", "There", "World"] = "There"
 
-(*
-val test8 = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE
+(* Problem 8. Tests *)
+val test8_1 = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE
+val test8_2 = all_answers (fn x => if x = 1 then SOME [x] else NONE)
+[2,3,4,5,6,1,7] = NONE
+val test8_3 = all_answers (fn x => if x = 1 then SOME [x] else NONE) [1, 1, 1] =
+ SOME [1, 1, 1]
+val test8_4 = all_answers (fn x => if Char.isUpper (String.sub (x, 0)) then SOME
+[x] else NONE) ["hello", "world", "how", "are", "you"] = NONE
+val test8_5 = all_answers (fn x => if Char.isUpper (String.sub (x, 0)) then SOME
+[x] else NONE) ["hello", "world", "How", "are", "you"] = NONE
+val test8_6 = all_answers (fn x => if Char.isUpper (String.sub (x, 0)) then SOME
+[x] else NONE) ["Hello", "World", "How", "Are", "You"] = SOME ["Hello",
+                            "World", "How", "Are", "You"]
 
+
+(*
 val test9a = count_wildcards Wildcard = 1
 
 val test9b = count_wild_and_variable_lengths (Variable("a")) = 1
