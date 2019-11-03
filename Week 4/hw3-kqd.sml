@@ -134,6 +134,7 @@ fun all_answers f = fn arg_list =>
                                                    | SOME [x] =>
                                                        all_answers_helper (rest,
                                                        SOME (ans_list @ [x]))
+                                                  | SOME [] => SOME ans_list
     in
     case arg_list of 
          [] => SOME []
@@ -183,7 +184,26 @@ fun check_pat p =
            | _ => true
     end
 
-
+(* 11. Write a function match that takes a valu * pattern and returns a (string * valu) list option,
+       namely NONE if the pattern does not match and SOME lst where lst is the list of bindings if it does.
+       Note that if the value matches but the pattern has no patterns of the form Variable s, then the result
+       is SOME []. Hints: Sample solution has one case expression with 7 branches. The branch for tuples
+       uses all_answers and ListPair.zip. Sample solution is 13 lines. Remember to look above for the
+       rules for what patterns match what values, and what bindings they produce. These are hints: We are
+       not requiring all_answers and ListPair.zip here, but they make it easier. *)
+fun match (v, p) = 
+    case (v, p) of
+         (_, Wildcard) => SOME []
+       | (x, (Variable str)) => SOME [(str, x)]
+       | (Unit, UnitP) => SOME []
+       | ((Const vi), (ConstP pi)) => if vi = pi then SOME [] else NONE
+       | ((Constructor (vstr, x)), ConstructorP (pstr, pat)) => if vstr = pstr
+       then match (x, pat) else NONE
+       | ((Tuple vs), (TupleP ps)) => if List.length (vs) = List.length (ps)
+                                      then (all_answers match (ListPair.zip (vs,
+                                      ps)))
+                                      else NONE
+       | _ => NONE
 
 
 
