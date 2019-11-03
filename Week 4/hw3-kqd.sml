@@ -205,33 +205,9 @@ fun match (v, p) =
                                       else NONE
        | _ => NONE
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+(* 12. Write a function first_match that takes a value and a list of patterns and returns a
+       (string * valu) list option, namely NONE if no pattern in the list matches or SOME lst where
+       lst is the list of bindings for the first pattern in the list that matches. Use first_answer and a
+       handle-expression. Hints: Sample solution is 3 lines. *)
+fun first_match v ps =
+    (SOME (first_answer (fn p => match (v, p)) ps)) handle NoAnswer => NONE

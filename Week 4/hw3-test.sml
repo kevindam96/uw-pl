@@ -99,21 +99,9 @@ val test11_2 = match ((Tuple [Const(0), Const(0)]),
                       (TupleP [ConstP(0), ConstP(0)])) = SOME []
 val test11_3 = match (Const(3), Wildcard) = SOME []
 val test11_4 = match (Const(3), Variable("three")) = SOME [("three", Const(3))]
-                      (*
-val test11_2 = match (Tuple [(Const (17)), Unit, 3, (Tuple [(Const (19)), 3])], 
-                     (TupleP [(ConstP (17)), UnitP, (Variable "three"), (TupleP
-                     [(ConstP (19)), Wildcard])])) =
-SOME [("three", 3)]
-val test11_3 = match (3, Wildcard) = SOME []
-val test11_4 = match ((Tuple [3, 6]), (TupleP [Wildcard])) = NONE
-val test11_5 = match (3, (Variable "three")) = SOME [("three", 3)]
-val test11_6 = match ((Constructor ("Build", 2)), (ConstructorP ("Build",
-Wildcard))) = SOME []
-val test11_7 = match ((Constructor ("Break", 2)), (ConstructorP ("Build"),
-Wildcard)) = NONE
-*)
 
-(*
-val test12 = first_match Unit [UnitP] = SOME []
-
-*)
+(* Problem 12. Tests *)
+val test12_1 = first_match Unit [UnitP] = SOME []
+val test12_2 = first_match Unit [ConstP(2), ConstP(3), ConstP(4), UnitP] = SOME
+[]
+val test12_3 = first_match Unit [ConstP(2), ConstP(3), ConstP(4)] = NONE
