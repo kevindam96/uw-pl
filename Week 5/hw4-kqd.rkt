@@ -7,15 +7,9 @@
 
 ;; Problem 1.
 (define (sequence low high stride)
-  (letrec ([sequence-helper (lambda (low high stride res)
-                              (if (> low high)
-                                  res
-                                  (sequence-helper (+ low stride)
-                                                   high
-                                                   stride
-                                                   (append res (cons low null)))))])
-    ;; use tail recursion
-    (sequence-helper low high stride null)))
+  (if (> low high)
+      null
+      (cons low (sequence (+ low stride) high stride))))
 
 ;; Problem 2.
 (define (string-append-map xs suffix)
@@ -63,11 +57,9 @@
 
 ;; Problem 7.
 (define (stream-add-zero s)
-  (letrec
-      ([f (lambda ()
-            (cons (cons 0 (car (s))) (cdr (s))))])
-    (lambda ()
-      (f))))
+  (lambda ()
+    (let ([next (s)])
+      (cons (cons 0 (car next)) (stream-add-zero (cdr next))))))
 
 ;; Problem 8.
 (define (cycle-lists xs ys)
@@ -94,21 +86,21 @@
 ;; Problem 10.
 (define (cached-assoc xs n)
   (letrec ([memo (make-vector n)]
+           [i 0]
+           [memoize (lambda (i v)
+                      (vector-set! memo
+                                   (remainder i n)
+                                   v))]
            [res (lambda (v)
                   (let
                       ([vector-assoc-res (vector-assoc v memo)])
                     (if (false? vector-assoc-res)
                         (assoc v xs)
-                        vector-assoc-res)))]
-           [memoize (lambda (i v)
-                      (vector-set! memo
-                                   (remainder i n)
-                                   v))]
-           [i 0])
-    (begin
-      (memoize i res)
-      (set! i (+ i 1))
-      res)))
+                        (begin
+                          (memoize i res)
+                          (set! i (+ i 1))
+                          res))))])
+    res))
 
 
 
