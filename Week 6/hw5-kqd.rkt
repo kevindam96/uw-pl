@@ -102,16 +102,21 @@
 
 
 (define (mlet* lstlst e2)
-  (letrec ([loop (lambda (lst e env)
-                   (if (null? lst)
-                       (eval-under-env e env)
-                       (loop (cdr lst) e (cons (cons (car (car lst)) (cdr (car lst))) env))))])
-    (loop lstlst e2 null)))
+  (if (null? lstlst)
+      e2
+      (mlet (car (car lstlst)) (cdr (car lstlst))
+            (mlet* (cdr lstlst) e2))))
 
 (define (ifeq e1 e2 e3 e4)
-  (let ([v1 (int-num e1)]
-        [v2 (int-num e2)])
-    (if (= v1 v2) e3 e4)))
+  (mlet* (cons (cons "_x" e1)
+               (cons (cons "_y" e2) null))
+         (ifgreater (var "_x")
+                    (var "_y")
+                    e4
+                    (ifgreater (var "_y")
+                               (var "_x")
+                               e4
+                               e3))))
 
 ;; Problem 4
 (define mupl-map
