@@ -404,6 +404,6 @@ class Shift < GeometryExpression
     self.class.new(@dx, @dy, @e.preprocess_prog)
   end
   def eval_prog(env)
-    @e.shift(@dx, @dy)
+    @e.eval_prog(env).shift(@dx, @dy)
   end
 end
