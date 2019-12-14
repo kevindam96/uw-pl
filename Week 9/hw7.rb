@@ -279,9 +279,6 @@ class LineSegment < GeometryValue
   def intersectVerticalLine(vl)
     vl.intersectLineSegment(self)
   end
-  def intersectLineSegment(seg)
-    seg.intersectLineSegment(self)
-  end
   def intersectWithSegmentAsLineResult(seg)
     if real_close(@x1, seg.x1)
       if @y1 < seg.y1
