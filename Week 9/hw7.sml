@@ -223,15 +223,3 @@ fun preprocess_prog (e) =
        (preprocess_prog e2))
        | Shift (dx, dy, e) => Shift (dx, dy, (preprocess_prog e))
        | _ => e
-
-
-
-
-
-
-
-
-
-
-
-
