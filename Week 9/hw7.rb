@@ -268,7 +268,19 @@ class LineSegment < GeometryValue
     self.class.new(@x1 + dx, @y1 + dy, @x2 + dx, @y2 + dy)
   end
   def intersect(e)
-    e.intersectWithSegmentAsLineResult(self)
+    e.intersectLineSegment(self)
+  end
+  def intersectPoint(p)
+    p.intersectLineSegment(self)
+  end
+  def intersectLine(l)
+    l.intersectLineSegment(self)
+  end
+  def intersectVerticalLine(vl)
+    vl.intersectLineSegment(self)
+  end
+  def intersectLineSegment(seg)
+    seg.intersectLineSegment(self)
   end
   def intersectWithSegmentAsLineResult(seg)
     if real_close(@x1, seg.x1)
